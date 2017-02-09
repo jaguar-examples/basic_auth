@@ -1,7 +1,7 @@
 part of example.basic_auth.server;
 
 /// Collection of routes students can also access
-@RouteGroup(path: '/book')
+@RouteGroup()
 @WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
   #sessionManager: const MakeParamFromMethod(#sessionManager)
 })

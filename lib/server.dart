@@ -21,9 +21,9 @@ final Map<String, Book> _books = {
 
 @Api(path: '/api')
 class LibraryApi {
-  @Group()
+  @Group(path: '/auth')
   final AuthRoutes auth = new AuthRoutes();
 
-  @Group()
+  @Group(path: '/book')
   final StudentRoutes student = new StudentRoutes();
 }

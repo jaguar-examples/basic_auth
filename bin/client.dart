@@ -55,7 +55,8 @@ getAll() async {
 }
 
 login() async {
-  HttpClientRequest req = await _client.post(kHostname, kPort, '/api/login');
+  HttpClientRequest req =
+      await _client.post(kHostname, kPort, '/api/auth/login');
   req.cookies.addAll(_cookies.values);
 
   AuthHeaders auth = new AuthHeaders();
