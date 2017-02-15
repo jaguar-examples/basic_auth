@@ -31,7 +31,7 @@ const WhiteListPasswordChecker kModelManager =
 })
 class AuthRoutes {
   @Post(path: '/login')
-  @WrapBasicAuth(modelManager: kModelManager)
+  @WrapBasicAuth(kModelManager)
   void login(Request req) {}
 
   @Post(path: '/logout')

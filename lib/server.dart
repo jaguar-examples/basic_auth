@@ -1,6 +1,5 @@
 library example.basic_auth.server;
 
-import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 

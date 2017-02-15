@@ -5,7 +5,7 @@ part of example.basic_auth.server;
 @WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
   #sessionManager: const MakeParamFromMethod(#sessionManager)
 })
-@WrapUserAuthoriser(modelManager: kModelManager)
+@WrapUserAuthoriser(kModelManager)
 class StudentRoutes {
   @Get(path: '/all')
   Response<String> getAllBooks() {
