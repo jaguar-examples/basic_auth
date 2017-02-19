@@ -7,8 +7,8 @@ import 'package:auth_basic/server.dart';
 main() async {
   final api = new JaguarReflected(new LibraryApi());
 
-  Configuration configuration = new Configuration();
+  Jaguar configuration = new Jaguar();
   configuration.addApi(api);
 
-  await serve(configuration);
+  await configuration.serve();
 }

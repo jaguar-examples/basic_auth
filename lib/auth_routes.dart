@@ -26,9 +26,7 @@ const WhiteListPasswordChecker kModelManager =
 
 /// This route group contains login and logout routes
 @RouteGroup()
-@WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
-  #sessionManager: const MakeParamFromMethod(#sessionManager)
-})
+@Wrap(const [#sessionInterceptor])
 class AuthRoutes {
   @Post(path: '/login')
   @WrapBasicAuth(kModelManager)
@@ -38,6 +36,9 @@ class AuthRoutes {
   void logout() {
     //TODO logout
   }
+
+  WrapSessionInterceptor sessionInterceptor() =>
+      new WrapSessionInterceptor(sessionManager());
 
   CookieSessionManager sessionManager() => new CookieSessionManager();
 }

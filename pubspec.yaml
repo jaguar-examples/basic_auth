@@ -1,8 +1,8 @@
 name: auth_basic
-version: 0.3.1
+version: 0.4.0
 description: Basic authentication example with jaguar, jaguar_auth and jaguar_session
 dependencies:
-  jaguar: '>=0.3.2 <0.4.0'
-  jaguar_reflect: '>=0.3.4 <0.4.0'
-  jaguar_auth: '>=0.3.1 <0.4.0'
-  jaguar_session: '>=0.3.0 <0.4.0'
+  jaguar: '>=0.4.0 <0.5.0'
+  jaguar_reflect: '>=0.4.3 <0.5.0'
+  jaguar_auth: '>=0.4.0 <0.5.0'
+  jaguar_session: '>=0.4.1 <0.5.0'

@@ -2,9 +2,7 @@ part of example.basic_auth.server;
 
 /// Collection of routes students can also access
 @RouteGroup()
-@WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
-  #sessionManager: const MakeParamFromMethod(#sessionManager)
-})
+@Wrap(const [#sessionInterceptor])
 @WrapUserAuthoriser(kModelManager)
 class StudentRoutes {
   @Get(path: '/all')
@@ -21,6 +19,9 @@ class StudentRoutes {
     Book book = _books[id];
     return book.toJson();
   }
+
+  WrapSessionInterceptor sessionInterceptor() =>
+      new WrapSessionInterceptor(sessionManager());
 
   CookieSessionManager sessionManager() => new CookieSessionManager();
 }
