@@ -1,5 +1,13 @@
+<div class="header">
+    <div>Do it.</div>
+</div>
+
 <div class="account" *ngIf="service.user == null">
     <signup-view></signup-view>
     <div class="divider"></div>
     <login-view></login-view>
+</div>
+
+<div class="content" *ngIf="service.user != null">
+    <todos-view></todos-view>
 </div>

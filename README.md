@@ -1,6 +1,7 @@
-# boilerplate
+# Basic auth demonstration using Jaguar and Jaguar_auth
 
-A very very simple example of building API with jaguar. The aim of the project is to introduce simple `RouteGroup`, `Api`, `jaguar.yaml` configuration file and `jaguar build` command.
+This repository contains a sample 'Todo list' implementation to showcase
+user authentication and session management capabilities of Jaguar.
 
 ## Inststructions
 

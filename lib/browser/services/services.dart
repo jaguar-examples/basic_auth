@@ -20,7 +20,16 @@ class Service {
 
   List<TodoItem> get tasks => user?.tasks;
 
-  Future<Null> login(String email, String password) async {
+  Future<UserView> fetchUser() async {
+    final JsonResponse resp = await jClient.get('/api/auth/user');
+    if (resp.statusCode != 200) {
+      throw new Exception("Failed!");
+    }
+    _user = resp.deserialize(type: UserView);
+    return _user;
+  }
+
+  Future<UserView> login(String email, String password) async {
     final payload = new AuthPayload(email, password);
     final JsonResponse resp =
         await jClient.authenticateBasic(payload, url: '/api/auth/login');
@@ -28,6 +37,7 @@ class Service {
       throw new Exception("Login failed!");
     }
     _user = resp.deserialize(type: UserView);
+    return _user;
   }
 
   Future<Null> signup(CreateUser user) async {
@@ -44,5 +54,14 @@ class Service {
       throw new Exception("Logout failed!");
     }
     _user = null;
+  }
+
+  Future<List<TodoItem>> addTask(TodoItem item) async {
+    final JsonResponse resp = await jClient.post('/api/todos', body: item);
+    if (resp.statusCode != 200) {
+      // TODO handle auth error
+      throw new Exception("Logout failed!");
+    }
+    return resp.deserialize(type: TodoItem);
   }
 }

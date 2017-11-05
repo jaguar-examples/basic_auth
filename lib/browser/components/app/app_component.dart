@@ -6,6 +6,7 @@ import 'package:angular_components/angular_components.dart';
 
 import '../login/login.dart';
 import '../signup/signup.dart';
+import '../todo/todo/todo.dart';
 
 import '../../services/services.dart';
 
@@ -17,12 +18,20 @@ import '../../services/services.dart';
     CORE_DIRECTIVES,
     materialDirectives,
     LoginView,
-    SignupView
+    SignupView,
+    TodosView,
   ],
   providers: const [materialProviders, Service],
 )
 class AppComponent {
   final Service service;
 
-  AppComponent(this.service);
+  AppComponent(this.service) {
+    // TODO show spinner
+    service.fetchUser().then((_) {
+      // TODO hide spinner
+    }, onError: (_) {
+      // TODO hide spinner
+    });
+  }
 }

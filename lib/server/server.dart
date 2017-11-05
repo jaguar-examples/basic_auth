@@ -11,7 +11,15 @@ import 'package:ulid/ulid.dart';
 
 import 'models.dart';
 
-final List<User> users = <User>[];
+final List<User> users = <User>[
+  new User.make(
+    '1',
+    'tejainece@gmail.com',
+    UserManager.hasher.hash('1234as'),
+    'Teja',
+    <TodoItem>[],
+  )
+];
 
 class UserManager implements AuthModelManager<User> {
   const UserManager();
@@ -63,10 +71,18 @@ class AuthRoutes extends Object with JsonRoutes {
   }
 
   @Post(path: '/logout')
+  @WrapOne(#authorizer)
   Future logout(Context ctx) async {
     // Clear session data
     (await ctx.req.session).clear();
   }
+
+  @Get(path: '/user')
+  @WrapOne(#authorizer)
+  Response getUser(Context ctx) =>
+      toJson(ctx.getInput<User>(Authorizer).toView);
+
+  Authorizer authorizer(Context ctx) => new Authorizer(UserManager.manager);
 
   BasicAuth basicAuth(Context ctx) => new BasicAuth(UserManager.manager);
 }

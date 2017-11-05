@@ -1,15 +1,9 @@
-<div>
-  <div>
-    <div>Username</div>
-    <input type="text"/>
-  </div>
+<div class="adder">
+  <input type="text" [(ngModel)]="newTask.title" />
+  <textarea rows="4" cols="50" [(ngModel)]="newTask.message">
+  </textarea>
 
-  <div>
-    <div>Password</div>
-    <input type="text"/>
-  </div>
-
-  <div>Login</div>
-
-  <div>Login with Facebook</div>
+  <button class="btn btn-primary" type="submit" (click)="add()">
+    <i class="fa fa-plus fa-fw"></i> Add
+  </button>
 </div>

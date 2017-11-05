@@ -45,15 +45,28 @@ class TodoItem {
 
   TodoItem.make(this.id, this.title, this.message,
       {this.reminder, this.finished: false});
+
+  String toString() {
+    final sb = new StringBuffer();
+
+    sb.writeln('Title: $title');
+    sb.writeln('Finished: $finished');
+    sb.writeln(message);
+    // TODO reminder
+
+    return sb.toString();
+  }
 }
 
 class DateTimeProcessor implements FieldProcessor<DateTime, int> {
   const DateTimeProcessor();
 
-  DateTime deserialize(int value) =>
-      new DateTime.fromMillisecondsSinceEpoch(value * 1000, isUtc: true);
+  DateTime deserialize(int value) => value != null
+      ? new DateTime.fromMillisecondsSinceEpoch(value * 1000, isUtc: true)
+      : null;
 
-  int serialize(DateTime value) => value.millisecondsSinceEpoch ~/ 1000;
+  int serialize(DateTime value) =>
+      value != null ? value.millisecondsSinceEpoch ~/ 1000 : null;
 }
 
 @GenSerializer()
