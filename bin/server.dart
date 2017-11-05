@@ -1,14 +1,13 @@
 library example.basic_auth.server;
 
 import 'package:jaguar/jaguar.dart';
-import 'package:jaguar_reflect/jaguar_reflect.dart';
-import 'package:auth_basic/server.dart';
+import 'package:auth_basic/server/server.dart';
 
 main() async {
-  final api = new JaguarReflected(new LibraryApi());
+  final server = new Jaguar(port: 10000);
+  server.addApiReflected(new TodoApi());
 
-  Jaguar configuration = new Jaguar();
-  configuration.addApi(api);
+  server.log.onRecord.listen((r) => print(r));
 
-  await configuration.serve();
+  await server.serve();
 }
