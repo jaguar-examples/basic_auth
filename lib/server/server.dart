@@ -1,5 +1,6 @@
 library example.basic_auth.server;
 
+import 'dart:io';
 import 'dart:async';
 
 import 'package:jaguar/jaguar.dart';
@@ -34,9 +35,6 @@ class UserManager implements AuthModelManager<User> {
   static const UserManager manager = const UserManager();
 }
 
-final JsonRepo jsonRepo = new JsonRepo(
-    serializers: [new UserViewSerializer(), new TodoItemSerializer()]);
-
 /// This route group contains login and logout routes
 @Api()
 class AuthRoutes extends Object with JsonRoutes {
@@ -46,7 +44,22 @@ class AuthRoutes extends Object with JsonRoutes {
   @WrapOne(#basicAuth) // Wrap basic authenticator
   Response<String> login(Context ctx) {
     final User user = ctx.getInput<User>(BasicAuth);
-    return toJson(user);
+    return toJson(user.toView);
+  }
+
+  @Post(path: '/signup')
+  Future signup(Context ctx) async {
+    print(await ctx.req.bodyAsText());
+    final CreateUser creator = await fromJson(ctx, type: CreateUser);
+    if (UserManager.manager.fetchByAuthenticationId(ctx, creator.email) !=
+        null) {
+      throw toJson({'@msg': 'Email already exists!'},
+          statusCode: HttpStatus.BAD_REQUEST);
+    }
+    final User user = new User.make(new Ulid().toUuid(), creator.email,
+        UserManager.hasher.hash(creator.password), creator.name, <TodoItem>[]);
+    users.add(user);
+    return toJson({'@msg': 'Signup successful!'});
   }
 
   @Post(path: '/logout')

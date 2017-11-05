@@ -4,6 +4,14 @@ import 'package:jaguar_serializer/jaguar_serializer.dart';
 
 part 'models.g.dart';
 
+class CreateUser {
+  String name;
+
+  String email;
+
+  String password;
+}
+
 class UserView {
   String id;
 
@@ -48,6 +56,13 @@ class DateTimeProcessor implements FieldProcessor<DateTime, int> {
   int serialize(DateTime value) => value.millisecondsSinceEpoch ~/ 1000;
 }
 
+@GenSerializer()
+class CreateUserSerializer extends Serializer<CreateUser>
+    with _$CreateUserSerializer {
+  @override
+  CreateUser createModel() => new CreateUser();
+}
+
 @GenSerializer(serializers: const [TodoItemSerializer])
 class UserViewSerializer extends Serializer<UserView>
     with _$UserViewSerializer {
@@ -63,3 +78,9 @@ class TodoItemSerializer extends Serializer<TodoItem>
   @override
   TodoItem createModel() => new TodoItem();
 }
+
+final JsonRepo jsonRepo = new JsonRepo(serializers: [
+  new UserViewSerializer(),
+  new TodoItemSerializer(),
+  new CreateUserSerializer()
+]);

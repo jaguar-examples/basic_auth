@@ -27,11 +27,12 @@ class User implements AuthorizationUser {
   User.make(this.id, this.email, this.password, this.name, this.tasks);
 
   String get authorizationId => id;
+
+  UserView get toView => new UserView.make(id, name, tasks);
 }
 
 @GenSerializer(serializers: const [TodoItemSerializer])
-class UserSerializer extends Serializer<User>
-    with _$UserSerializer {
+class UserSerializer extends Serializer<User> with _$UserSerializer {
   @override
   User createModel() => new User();
 }

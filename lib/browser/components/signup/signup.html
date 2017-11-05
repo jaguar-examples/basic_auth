@@ -1,0 +1,36 @@
+<div class="subtitle">
+  Are you a new member?
+</div>
+<div class="title">
+  Sign up
+</div>
+
+<div class="form">
+  <div class="input-group">
+    <span class="input-group-addon" id="label-email">
+      <i class="fa fa-envelope-o fa-fw"></i>
+    </span>
+    <input type="text" class="form-control" placeholder="Email"
+           aria-label="Email" [(ngModel)]="creator.email"/>
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-addon" id="label-password">
+      <i class="fa fa-key fa-fw"></i>
+    </span>
+    <input type="text" class="form-control"
+           placeholder="Password" aria-label="Password" [(ngModel)]="creator.password"/>
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-addon" id="label-name">
+      <i class="fa fa-user-o fa-fw"></i>
+    </span>
+    <input type="text" class="form-control"
+           placeholder="Name" aria-label="Name" [(ngModel)]="creator.name"/>
+  </div>
+
+  <div class="row justify-content-center">
+    <button class="btn btn-primary" type="submit" (click)="signup()">Sign up</button>
+  </div>
+</div>

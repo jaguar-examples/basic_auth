@@ -1,0 +1,31 @@
+<div class="subtitle">
+  Are you already a member?
+</div>
+<div class="title">
+  Login
+</div>
+
+<div class="form">
+  <div class="input-group">
+    <span class="input-group-addon" id="label-email">
+      <i class="fa fa-envelope-o fa-fw"></i>
+    </span>
+    <input type="text" [(ngModel)]="email" class="form-control"
+           placeholder="Email"
+           aria-label="Email"/>
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-addon" id="label-password">
+      <i class="fa fa-key fa-fw"></i>
+    </span>
+    <input type="text" [(ngModel)]="password"
+           class="form-control"
+           placeholder="Password"
+           aria-label="Password"/>
+  </div>
+
+  <div class="row justify-content-center">
+    <button class="btn btn-primary" type="submit" (click)="login()">Login</button>
+  </div>
+</div>

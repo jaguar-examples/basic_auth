@@ -4,6 +4,47 @@ part of todo.common.models;
 
 // **************************************************************************
 // Generator: SerializerGenerator
+// Target: class CreateUserSerializer
+// **************************************************************************
+
+abstract class _$CreateUserSerializer implements Serializer<CreateUser> {
+  Map toMap(CreateUser model, {bool withType: false, String typeKey}) {
+    Map ret = new Map();
+    if (model != null) {
+      if (model.name != null) {
+        ret["name"] = model.name;
+      }
+      if (model.email != null) {
+        ret["email"] = model.email;
+      }
+      if (model.password != null) {
+        ret["password"] = model.password;
+      }
+      if (modelString() != null && withType) {
+        ret[typeKey ?? defaultTypeInfoKey] = modelString();
+      }
+    }
+    return ret;
+  }
+
+  CreateUser fromMap(Map map, {CreateUser model, String typeKey}) {
+    if (map is! Map) {
+      return null;
+    }
+    if (model is! CreateUser) {
+      model = createModel();
+    }
+    model.name = map["name"];
+    model.email = map["email"];
+    model.password = map["password"];
+    return model;
+  }
+
+  String modelString() => "CreateUser";
+}
+
+// **************************************************************************
+// Generator: SerializerGenerator
 // Target: class UserViewSerializer
 // **************************************************************************
 
