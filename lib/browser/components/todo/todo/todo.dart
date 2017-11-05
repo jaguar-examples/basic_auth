@@ -20,19 +20,14 @@ class TodosView {
 
   final Service service;
 
-  final List<TodoItem> tasks = <TodoItem>[];
-
   TodosView(this.service);
 
   //TODO
 
   add() {
     // TODO show spinner
-    service.addTask(newTask).then((List<TodoItem> latestTasks) {
+    service.addTask(newTask).then((_) {
       // TODO show message
-
-      tasks.clear();
-      tasks.addAll(latestTasks);
 
       // TODO remove spinner
     }, onError: (_) {

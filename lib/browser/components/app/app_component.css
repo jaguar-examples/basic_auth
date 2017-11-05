@@ -18,15 +18,20 @@
 }
 
 .account {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: calc(100% - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .divider {
     border-right: 2px dashed #8A8A8A;
     margin: 0px 50px;
     height: 375px;
+}
+
+.content {
+    width: 100%;
+    height: calc(100% - 40px);
 }

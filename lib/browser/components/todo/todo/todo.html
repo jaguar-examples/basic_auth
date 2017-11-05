@@ -1,9 +1,38 @@
-<div class="adder">
-  <input type="text" [(ngModel)]="newTask.title" />
-  <textarea rows="4" cols="50" [(ngModel)]="newTask.message">
-  </textarea>
+<div class="content align-content-center">
+  <div class="todo-input">
+    <div class="input-group">
+      <span class="input-group-addon" id="label-title">
+        <i class="fa fa-header fa-fw"></i>
+      </span>
+        <input type="text" class="form-control" placeholder="Title"
+               aria-label="Title" [(ngModel)]="newTask.title"/>
+    </div>
 
-  <button class="btn btn-primary" type="submit" (click)="add()">
-    <i class="fa fa-plus fa-fw"></i> Add
-  </button>
+    <div class="input-group">
+      <span class="input-group-addon" id="label-message">
+        <i class="fa fa-book fa-fw"></i>
+      </span>
+      <textarea rows="3" class="form-control" [(ngModel)]="newTask.message"
+                placeholder="Message">
+      </textarea>
+    </div>
+
+    <div class="controls row justify-content-center">
+      <button class="btn btn-primary" type="submit" (click)="add()">
+        <i class="fa fa-plus fa-fw"></i> Add
+      </button>
+      <button class="btn btn-danger" type="submit" (click)="add()">
+        <i class="fa fa-trash-o fa-fw"></i> Cancel
+      </button>
+    </div>
+  </div>
+
+  <div class="items">
+    <div class="item" *ngFor="let task of service.tasks">
+      <div class="item-title">{{task.title}}</div>
+      <div *ngIf="task.message.isNotEmpty" class="item-message">
+        {{task.message}}
+      </div>
+    </div>
+  </div>
 </div>

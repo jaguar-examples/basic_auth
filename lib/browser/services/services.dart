@@ -62,6 +62,7 @@ class Service {
       // TODO handle auth error
       throw new Exception("Logout failed!");
     }
-    return resp.deserialize(type: TodoItem);
+    _user.tasks =  resp.deserialize(type: TodoItem);
+    return _user.tasks;
   }
 }
