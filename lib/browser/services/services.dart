@@ -1,6 +1,7 @@
 library login_client.services;
 
 import 'dart:async';
+import 'dart:collection';
 import 'package:angular/angular.dart';
 import 'package:http/browser_client.dart' as http;
 import 'package:jaguar_client/jaguar_client.dart';
@@ -62,7 +63,57 @@ class Service {
       // TODO handle auth error
       throw new Exception("Logout failed!");
     }
-    _user.tasks =  resp.deserialize(type: TodoItem);
+    _user.tasks = resp.deserialize(type: TodoItem);
     return _user.tasks;
+  }
+
+  Future<List<TodoItem>> removeTask(TodoItem item) async {
+    final JsonResponse resp = await jClient.delete('/api/todos/${item.id}');
+    if (resp.statusCode != 200) {
+      // TODO handle auth error
+      throw new Exception("Logout failed!");
+    }
+    _user.tasks = resp.deserialize(type: TodoItem);
+    return _user.tasks;
+  }
+}
+
+class SpinnerInfo {
+  String title;
+
+  String message;
+
+  bool isError = false;
+
+  bool isInfo = false;
+
+  SpinnerInfo({this.title, this.message});
+
+  SpinnerInfo.error({this.title, this.message}) : isError = true;
+
+  SpinnerInfo.info({this.title, this.message}) : isInfo = true;
+}
+
+@Injectable()
+class UIService {
+  final _spinnerInfos = new SplayTreeMap<int, SpinnerInfo>();
+
+  SpinnerInfo _spinnerInfo;
+
+  SpinnerInfo get spinnerInfo => _spinnerInfo;
+
+  int _overlayId = 0;
+
+  UIService();
+
+  int showOverlay(SpinnerInfo info) {
+    _spinnerInfos[_overlayId] = info;
+    _spinnerInfo = _spinnerInfos[_spinnerInfos.firstKey()];
+    return _overlayId++;
+  }
+
+  void hideOverlay(int id) {
+    _spinnerInfos.remove(id);
+    _spinnerInfo = _spinnerInfos[_spinnerInfos.firstKey()];
   }
 }

@@ -20,18 +20,43 @@ class TodosView {
 
   final Service service;
 
-  TodosView(this.service);
+  final UIService uiService;
 
-  //TODO
+  TodosView(this.service, this.uiService);
 
   add() {
-    // TODO show spinner
+    // Show spinner
+    final int overlayId = uiService.showOverlay(
+        new SpinnerInfo(title: 'Please wait ...', message: 'Adding new task.'));
+
     service.addTask(newTask).then((_) {
       // TODO show message
 
-      // TODO remove spinner
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
     }, onError: (_) {
-      // TODO
+      // TODO show message
+
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
+    });
+  }
+
+  remove(TodoItem item) {
+    // Show spinner
+    final int overlayId = uiService.showOverlay(
+        new SpinnerInfo(title: 'Please wait ...', message: 'Removing task.'));
+
+    service.removeTask(item).then((_) {
+      // TODO show message
+
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
+    }, onError: (_) {
+      // TODO show message
+
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
     });
   }
 }

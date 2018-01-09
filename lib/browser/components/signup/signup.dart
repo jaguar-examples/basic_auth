@@ -20,16 +20,25 @@ class SignupView {
 
   final Service service;
 
-  SignupView(this.service);
+  final UIService uiService;
+
+  SignupView(this.service, this.uiService);
 
   signup() {
-    // TODO show spinner
+    // Show spinner
+    final int overlayId = uiService.showOverlay(
+        new SpinnerInfo(title: 'Please wait ...', message: 'Adding new task.'));
+
     service.signup(creator).then((_) {
       // TODO show message
 
-      // TODO remove spinner
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
     }, onError: (_) {
+      // TODO show message
 
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
     });
   }
 }

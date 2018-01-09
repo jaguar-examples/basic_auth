@@ -21,18 +21,25 @@ class LoginView {
 
   final Service service;
 
-  LoginView(this.service);
+  final UIService uiService;
 
-  //TODO
+  LoginView(this.service, this.uiService);
 
   login() {
-    // TODO show spinner
+    // Show spinner
+    final int overlayId = uiService.showOverlay(
+        new SpinnerInfo(title: 'Please wait ...', message: 'Logging in.'));
+
     service.login(email, password).then((_) {
       // TODO show message
 
-      // TODO remove spinner
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
     }, onError: (_) {
+      // TODO show message
 
+      // Remove spinner
+      uiService.hideOverlay(overlayId);
     });
   }
 }

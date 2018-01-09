@@ -1,6 +1,7 @@
 // Copyright (c) 2017, teja. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
+import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -21,17 +22,33 @@ import '../../services/services.dart';
     SignupView,
     TodosView,
   ],
-  providers: const [materialProviders, Service],
+  providers: const [materialProviders, Service, UIService],
 )
 class AppComponent {
   final Service service;
 
-  AppComponent(this.service) {
+  final UIService uiService;
+
+  bool showUserDD = false;
+
+  AppComponent(this.service, this.uiService) {
     // TODO show spinner
     service.fetchUser().then((_) {
       // TODO hide spinner
     }, onError: (_) {
       // TODO hide spinner
+    });
+
+    document.body.onMouseDown.listen((_) {
+      //showUserDD = false;
+    });
+  }
+
+  logout() {
+    service.logout().then((_) {
+      // TODO
+    }, onError: (_) {
+      // TODO
     });
   }
 }

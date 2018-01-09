@@ -36,6 +36,7 @@
     box-sizing: border-box;
     background: #dadada;
     margin-bottom: 2px;
+    position: relative;
 }
 
 .item-title {
@@ -45,3 +46,19 @@
 .item-message {
     font-size: 12px;
 }
+
+.delete {
+    display: none;
+    position: absolute;
+    right: -100%;
+    top: 5px;
+}
+
+.item:hover > .delete {
+    display: block;
+}
+
+.delete:active {
+    color: gray;
+}
+

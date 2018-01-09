@@ -1,5 +1,18 @@
 <div class="header">
     <div>Do it.</div>
+    <div class="user-holder">
+        <div *ngIf="service.user != null" class="user" (click)="showUserDD = true">
+            <i class="fa fa-user-o fa-fw user-icon"></i>
+            <span class="user-name">{{service.user.name}}</span>
+            <i class="fa fa-caret-down fa-fw user-icon"></i>
+        </div>
+
+        <div class="dropdown-menu" [class.show]="showUserDD" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item disabled" href="#">Account</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+        </div>
+    </div>
 </div>
 
 <div class="account" *ngIf="service.user == null">
@@ -10,4 +23,12 @@
 
 <div class="content" *ngIf="service.user != null">
     <todos-view></todos-view>
+</div>
+
+<div *ngIf="uiService.spinnerInfo != null" class="spinner-overlay">
+    <div class="spinner-content">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <div *ngIf="uiService.spinnerInfo.title != null">{{uiService.spinnerInfo.title}}</div>
+        <div *ngIf="uiService.spinnerInfo.message != null">{{uiService.spinnerInfo.message}}</div>
+    </div>
 </div>

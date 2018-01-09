@@ -49,15 +49,14 @@ class AuthRoutes extends Object with JsonRoutes {
   JsonRepo get repo => jsonRepo;
 
   @Post(path: '/login')
-  @WrapOne(#basicAuth) // Wrap basic authenticator
-  Response<String> login(Context ctx) {
-    final User user = ctx.getInput<User>(BasicAuth);
+  Future<Response<String>> login(Context ctx) async {
+    /// Authenticate using basic-auth. Throws 401 if authentication fails.
+    final User user = await BasicAuth.authenticate(ctx, UserManager.manager);
     return toJson(user.toView);
   }
 
   @Post(path: '/signup')
   Future signup(Context ctx) async {
-    print(await ctx.req.bodyAsText());
     final CreateUser creator = await fromJson(ctx, type: CreateUser);
     if (UserManager.manager.fetchByAuthenticationId(ctx, creator.email) !=
         null) {

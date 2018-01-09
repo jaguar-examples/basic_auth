@@ -33,6 +33,7 @@
       <div *ngIf="task.message.isNotEmpty" class="item-message">
         {{task.message}}
       </div>
+      <i class="fa fa-trash-o fa-fw delete" (click)="remove(task)"></i>
     </div>
   </div>
 </div>

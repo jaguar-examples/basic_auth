@@ -9,12 +9,42 @@
     height: 40px;
     background-color: black;
     color: white;
-    padding: 5px 10px;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0px 10px;
 }
 
 .header .title {
     font-weight: bold;
+}
+
+.user-holder {
+    height: 100%;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0px 8px;
+    cursor: pointer;
+}
+
+.user:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.user-icon {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.user-name {
+    font-size: 14px;
+    margin-right: 5px;
 }
 
 .account {
