@@ -21,6 +21,14 @@
     font-weight: bold;
 }
 
+.title-image {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
 .user-holder {
     height: 100%;
 }

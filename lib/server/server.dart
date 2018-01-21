@@ -73,13 +73,13 @@ class AuthRoutes extends Object with JsonRoutes {
   @WrapOne(#authorizer)
   Future logout(Context ctx) async {
     // Clear session data
-    (await ctx.req.session).clear();
+    (await ctx.session).clear();
   }
 
   @Get(path: '/user')
   @WrapOne(#authorizer)
   Response getUser(Context ctx) =>
-      toJson(ctx.getInput<User>(Authorizer).toView);
+      toJson(ctx.getInterceptorResult<User>(Authorizer).toView);
 
   Authorizer authorizer(Context ctx) => new Authorizer(UserManager.manager);
 
@@ -93,13 +93,13 @@ class TodoRoutes extends Object with JsonRoutes {
   JsonRepo get repo => jsonRepo;
 
   @Get()
-  Response getAll(Context ctx) => toJson(ctx.getInput<User>(Authorizer).tasks);
+  Response getAll(Context ctx) => toJson(ctx.getInterceptorResult<User>(Authorizer).tasks);
 
   @Post()
   Future<Response> add(Context ctx) async {
     final TodoItem newItem = await fromJson(ctx, type: TodoItem);
     newItem.id = new Ulid().toUuid();
-    final User user = ctx.getInput(Authorizer);
+    final User user = ctx.getInterceptorResult(Authorizer);
     user.tasks.add(newItem);
     return toJson(user.tasks);
   }
@@ -107,7 +107,7 @@ class TodoRoutes extends Object with JsonRoutes {
   @Delete(path: '/:id')
   Future<Response> deleteById(Context ctx) async {
     final String id = ctx.pathParams['id'];
-    final User user = ctx.getInput(Authorizer);
+    final User user = ctx.getInterceptorResult(Authorizer);
     user.tasks.removeWhere((item) => item.id == id);
     return toJson(user.tasks);
   }
