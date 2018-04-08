@@ -1,0 +1,15 @@
+targets:
+  server:
+    builders:
+      jaguar_serializer_cli:
+        generate_for:
+          - lib/smodels/models.dart
+
+builders:
+  jaguar_serializer_cli:
+    target: ":jaguar_serializer_cli"
+    import: "package:jaguar_serializer_cli/jaguar_serializer_cli.dart"
+    builder_factories: ["jaguarSerializer"]
+    build_extensions: {".dart": [".g.dart"]}
+    auto_apply: dependents
+    build_to: source
