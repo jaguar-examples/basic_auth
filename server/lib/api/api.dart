@@ -12,9 +12,9 @@ import 'package:server/models/models.dart';
 final List<User> users = <User>[
   new User.make(
     '1',
-    'tejainece@gmail.com',
+    'demo@example.com',
     UserManager.hasher.hash('1234as'),
-    'Teja',
+    'DemoUser',
     <Task>[],
   )
 ];
@@ -85,7 +85,6 @@ class AuthRoutes {
 @Api()
 @WrapOne(#authorizer)
 class TodoRoutes {
-
   @GetJson()
   Future<List<Task>> getAll(Context ctx) async {
     User user = await Authorizer.authorize(ctx, UserManager.manager);

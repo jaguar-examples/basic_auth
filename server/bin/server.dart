@@ -6,7 +6,7 @@ import 'package:jaguar_dev_proxy/jaguar_dev_proxy.dart';
 import 'package:server/api/api.dart';
 
 main() async {
-  final server = new Jaguar(port: 10002);
+  final server = new Jaguar(port: 10000);
   server.addApi(reflect(new TasksApi()));
   server.addApi(new PrefixedProxyServer('', 'http://localhost:10001/'));
 

@@ -33,8 +33,8 @@ class User implements AuthorizationUser {
 }
 
 @GenSerializer(
-    serializers: const [TaskSerializer],
-    fields: {'id': EnDecode(alias: '_id', processor: MongoId())},
+  serializers: const [TaskSerializer],
+  fields: {'id': EnDecode(alias: '_id', processor: MongoId())},
 )
 class UserSerializer extends Serializer<User> with _$UserSerializer {
   @override
